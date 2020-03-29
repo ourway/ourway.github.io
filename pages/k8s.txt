@@ -1,47 +1,66 @@
-At a very high level, Kubernetes has 3 components:
+At a very high level, Kubernetes has
+3 components:
 
-    - One or more master nodes 
+- One or more master nodes 
 
-        - Master node is brain behind all operations.
-        - Master components are agents with very distinctive roles.
-        - Users send commands to Master node using CLI/Web UI/API.
-        - Only one of Master replicas controles the cluster.
-        - Master node includes:
-            - API Server (kube-apiserver): Intercept > Validate > Process
-            - Scheduler
-            - Control managers
-            - etcd
+    - Master node is brain behind all
+      operations.
+    - Master components are agents with
+      very distinctive roles.
+    - Users send commands to Master node
+      using CLI/Web UI/API.
+    - Only one of Master replicas
+      controles the cluster.
+    - Master node includes:
+        - API Server (kube-apiserver):
+          Intercept > Validate > Process
+        - Scheduler
+        - Control managers
+        - etcd
 
-    - One or more worker nodes
+- One or more worker nodes
 
-    - A distributed key-value store - for example etcd.
-        - etcd is used to store cluster state data not workload data.
-        - etcd is configured on the master node (stacked).
-        - Only Master node's API server can talk to etcd directly.
-        - New data is only appended, obsolete data is compacted.
+- A distributed key-value store - for
+  example etcd.
+    - etcd is used to store cluster state
+      data not workload data.
+    - etcd is configured on the master
+      node (stacked).
+    - Only Master node's API server can
+      talk to etcd directly.
+    - New data is only appended, obsolete
+      data is compacted.
 
 
-    - Worker Node are pod collections (containerized micro-services).
-	- worker nodes are managed by control plane agents (in master node)
-	- Pod is smallest scheduled unit in k8s. It's logical collections of
-		one or more containers scheduled together.
-	- To access applications inside worker nodes, we connect to woker nodes
-		not master node.
-	- components:
-		- container runtime (for example Docker)
-		- kube-proxy
-		- kubelet: receives pod definitions from API server. Also monitors
-			pod health. Connects to conrainer runtime using CRI. CRI or
-			Container runtime interface consists of:
-				- Protocol buffers
-				- gRPC API
-				- Libraries
-			Kubelet acts as gRPC client connects to the CRI shim acting
-			as gRPC server.
-			gRPC server implements two services:
-				- Image Service (image related operations)
-				- Runtime Service (pod and container related operations)
-		- dns, logging, monitoring, dashboard
-	
+- Worker Node are pod collections
+  (containerized micro-services).
+- worker nodes are managed by control
+  plane agents (in master node)
+- Pod is smallest scheduled unit in k8s.
+  It's logical collections of one or more
+containers scheduled together.
+- To access applications inside worker
+  nodes, we connect to woker nodes not
+master node.
+- components:
+  - container runtime (for example Docker)
+  - kube-proxy
+  - kubelet: receives pod definitions from
+    API server. Also monitors pod health.
+    Connects to conrainer runtime using CRI.
+    CRI or Container runtime interface
+    consists of:
+      - Protocol buffers
+      - gRPC API
+      - Libraries Kubelet acts as gRPC
+        client connects to the CRI shim
+    acting as gRPC server.  gRPC server
+    implements two services:
+      - Image Service (image related
+        operations)
+      - Runtime Service (pod and container
+        related operations)
+  - dns, logging, monitoring, dashboard
+
 
 
